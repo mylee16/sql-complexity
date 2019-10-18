@@ -112,9 +112,7 @@ In conclusion, the way we write our SQL query does have a big impact on the effi
 We re-wrote the inefficient query by our external vendor on Salesforce Marketing Cloud and we were able to reduce the run time from 45 mins + frequent timeout to 4 mins.
 
 Bonus: Queries don't start from `SELECT` but `FROM`. Now we know why LIMIT doesn't reduce compute cost.
-https://jvns.ca/blog/2019/10/03/sql-queries-don-t-start-with-select/
-
-(Special thanks to Shawn for sharing this)
+https://jvns.ca/blog/2019/10/03/sql-queries-don-t-start-with-select/ (thanks to Shawn for sharing this)
 
 
 Reference
