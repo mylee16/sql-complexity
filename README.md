@@ -31,7 +31,6 @@ WHERE f_online = 1
 -- Query time: 13.8 seconds
 -- Performance: Good
 ```
-
 ​Method 2: Uncorrelated Subquery
 This query does the filter function by first creating a subquery list of account_number, followed by an IN function to filter account number in the subquery.
 ```
@@ -41,7 +40,7 @@ WHERE t.account_number IN
 (SELECT account_number FROM `edenred.members_profile` WHERE f_online = 1)
 -- Query time: 20.5 seconds
 -- Performance: Average
-​```
+```
 
 Method 3: Correlated Subquery
 The EXISTS function can be used to search in an unfiltered subquery `SELECT *`, however for filter operation it requires a `where mp.account_number = t.account_number` embedded in the subquery which reduce efficiency.
@@ -53,7 +52,7 @@ WHERE EXISTS
 -- Query time: 52.6 seconds
 -- Performance: Worst
 ```
-​
+
 Method 4: Scalar Subquery in the WHERE clause
 By using a subquery as a filter on the WHERE function, the query is able to filter f_online = 1. Quite a cool way of think but unfortunately it doesn't perform well.
 ```
@@ -64,7 +63,7 @@ WHERE
 -- Query time: 47.4 seconds
 -- Performance: Worst
 ```
-​
+
 Method 5: Scalar Subquery in the SELECT clause
 Another really interesting way of writing a query. This method uses a subquery in the SELECT function to extract the account_number from another table, but as the two tables have a many to many relation, we have to add in a filter to remove the nulls.
 ```
@@ -75,7 +74,7 @@ WHERE (SELECT mp.account_number FROM `edenred.members_profile` mp WHERE mp.accou
 -- Query time: 45.4 seconds
 -- Performance: Worst
 ```
-​
+
 Method 6: Aggregate function to check existence
 Similar to Scalar Subquery this method uses a subquery in the WHERE function. The difference is that this method uses a subquery COUNT(*) with a filter of >1.
 ```
@@ -85,7 +84,7 @@ WHERE (select COUNT(*) FROM `edenred.members_profile` mp WHERE mp.account_number
 -- Query time: 19.9 seconds
 -- Performance: Average
 ```
-​
+
 Method 7: Correlated subquery (double negative)
 Similar to Correlates Subquery but uses a double negative.
 ```
@@ -96,7 +95,7 @@ AND t.account_number IS NOT NULL
 -- Query time: 26.4 seconds
 -- Performance: Average
 ```
-​
+
 Method 8: Uncorrelated subquery (double negative)
 Similar to Uncorrelated subquery but uses a double negative.
 ```
